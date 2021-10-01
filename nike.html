@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .mine{
+        display: inline-block;
+      }
+
+      #outer{
+        text-align:center;
+        margin: 0px 50px ;
+        max-width: 100%;
+        background-color:white;
+        
+      }
+         .fw {
+      
+      display: inline-block;
+      margin: 20px;
+      
+      
+
+    }
+
+     .fw .tooltiptext {
+      visibility: hidden;
+      max-width: 100%;
+      background-color:rgb(245, 245, 245,0.3);
+      color:black;
+      text-align-last: left;
+      padding: 5px 0;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1;
+    
+    } 
+
+
+
+     .fw:hover .tooltiptext {
+      visibility: visible;
+      
+    } 
+
+
+    .tk {
+      display: inline-block;
+      padding-bottom: 100px;
+      
+    }
+
+    
+
+
+
+
+    </style>
+</head>
+<body style="background-color: wheat; max-width: 100%;">
+    <div id="outer">
+      <div id="tk" style="text-align: left;">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASIAAACuCAMAAAClZfCTAAAAflBMVEX///8AAAD8/PwEBAT19fX5+fnu7u7x8fHV1dVvb28qKirn5+fJycmlpaUZGRnd3d3BwcGOjo57e3u7u7tXV1c5OTmvr6+ioqIkJCRfX18zMzOXl5doaGhSUlKBgYHi4uITExNFRUUWFhZ2dnZ/f38wMDCZmZljY2NBQUGQkJCvZq53AAAFSklEQVR4nO3ciXKqMBQGYBIW2VwoikvFpYu9vv8LXrJAXaCCWwL+30w7d+aqORxykkCwhgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnUKpTVXHUJOqOCk1LEVNN6PyRA5DhY3XZwc9FWliTfa857fb2DqOkkBJy1mV2RNXSdN1UMrOoR1GizTpqQsjnSut8mo8KtudpoR4rqFwLPLIUFXTl9Bh4s0I8XeswqiaFGWNRmSudq44J6Jx4rcFyWxjW20sU0I0nM6cMPpHuDfWxRWeQWrEhExUdeEK1H2fb0R+/GnAR2yV4blZHH2F7f+SWVgnPwOWHDP7SUdqQ+KCjywSlZUu8fzQdewNSO6DVZjS7sPjsifZ2VqqjULqjVZbkRvWf8hs6iibwo78sHhi1VFk5f6+/c2OLhVmsHO04h3aUdJ6Xt32sD/Pa8vMELL50meZlvC4xopaZzUUJN63yE0xBPl9x9BmmTYUMe0UNZ8NPn6RGFPW2FiTCmOo0fsWYT1z3UjlHNVz9yk5wkIZaFRhBgt2KUv/mZfPLD3U7Y+Llc9Bgr77jjYFJuxYXFmKZs9s1F4nnnmYl8KcdWaqwQotR/mqWsyvj29LXj8Eo69/pJS50qrCBGuRh/ec+41WGG3NsuSwClN5q6wKNT6LeXb18NYsd5fm657zBP2EIiK9UGP0G2b02LaG/eVMZsc8Gn34vzfRUASkXY6swSNTxIYefsROLBaGZfUlKkzframvg/P59pgmnFE0KU9PjleYbp0n5x5Fev/Pp+F+vPk7P6SoMD0dTL0m+XePOGnxy1j3L6aHLBKNFkBlkuN47xItX/nQgG9X/IFPaUudK4yzDk4yi/hO12iOXBjyq5qyJZBsMRL3ErVO0f50VLgy3IN32e7+qHgrMzRJtE6N5HycHIF/XaXlaxlrOJ1XJOSws7ajwoTd2QEk13/YOln6FzqOTBEh+7XRigQZ9vkBbK7rRsHobXaUg79s2RzGh3T9k9QvOcVvTc6uWDeH++2lrMjMsR9Pw+3eKtQ4X/I23QOx3en4o0Z+is+PgnYUmBSWn+tRzWOws6vS/F0Xi4sTFabTvbJLPiuOhN1VLx8mfhfO6/hzcfCWOiny3BZ1H8EZVB3MvuKWhLxj2ButLlyVHmN9zHxvV4UJcfm5Zwc0qRxSi7G5XmlJadKSCeyEV5UilqSyZwl74e6nsueV9x/++zN/eLJlKaLGpZ6wjRI3sLPisp11mETLijtildkRS8jBu5o98JtRfqOoUbE0xT88jVvWc35Rtm6sOVWfHHUD/MFWQ+1jZbfwGh5vA2arK0zKzmujebtxglpcYQW72dzUDJ/DWvOFpHLUWD8sP76ssHZnyDjZ+bgPPpqPlT46flcPSBGRFdbaGexE2WX+jb538rG7TqSI3q8Xmd2rMOl+hcYT9Kn3hupVgruliJDFlF3zUt13xJqi/q3XaPku4njUtQoTqJFeSkGdHMmvP3XU7tYLfXbrjVVYV+b4c8Obe5GosM4myLjlOpZ3P/boeJfTw8Q3dCBRYaqP4OHo1d0oFRXW3UGoENbeIzy0Wa1VB/5EUaMU8ddO+tYrVJiUFUrTtdE85PthL5Oj7DittF4/4i/y92r+joliPEeXksT/f9m5C/m67KpnH45s+8Er1dchNm2P/L/TY6bToHjxS6KGtZvl9WQeDD3czFP0h5R0Y8fjku7je/3hq44/J3gBWeF0ufXZ3po58LfzKAnlXuqrVlcFqxcEgdPT91tPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANAN/wFJ1TNLiwS45AAAAABJRU5ErkJggg==" alt="" style="width: 70px;">
+      </div>
+    <div class="fw">men
+        <span class="tooltiptext">
+          
+          <div class="mine">
+
+          
+          
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+
+        </div>
+
+
+          
+        <div class="mine">
+
+          
+          <h2>Shoes</h2>
+          <li> New Release</li>
+          <li>member Access</li>
+          <li>air forse 1</li>
+          <li>football club kids</li>
+          <li>sustainable materials</li>
+          <li>top pics under 7.500</li>
+          <li>slae</li>
+          <li> New Release</li>
+          <li>member Access</li>
+          <li>air forse 1</li>
+          <li>football club kids</li>
+       
+          
+
+        </div>
+         
+        <div class="mine">
+
+          
+          <h2>Shoes</h2>
+          <li> New Release</li>
+          <li>member Access</li>
+          <li>air forse 1</li>
+          <li>football club kids</li>
+          <li>sustainable materials</li>
+          <li>top pics under 7.500</li>
+          <li>slae</li>
+          <li> New Release</li>
+          <li>member Access</li>
+          <li>air forse 1</li>
+          <li>football club kids</li>
+        </div>
+
+         
+        <div class="mine">
+
+          
+          
+          <h2>Shoes</h2>
+          <li> New Release</li>
+          <li>member Access</li>
+          <li>air forse 1</li>
+          <li>football club kids</li>
+          <li>sustainable materials</li>
+          <li>top pics under 7.500</li>
+          <li>slae</li>
+          <li> New Release</li>
+          <li>member Access</li>
+          <li>air forse 1</li>
+          <li>football club kids</li>
+
+        </div>
+
+
+        
+        </span>
+      </div>
+       
+      <div class="fw">womemen
+          <span class="tooltiptext">
+
+            <div class="tk">
+
+          
+          
+              <h2>Shoes</h2>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+              <li>sustainable materials</li>
+              <li>top pics under 7.500</li>
+              <li>slae</li>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+  
+          </div>
+  
+  
+            
+          <div class="tk">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+         
+            
+  
+          </div>
+           
+          <div class="tk">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+          </div>
+  
+           
+          <div class="tk">
+  
+            
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+  
+          </div>
+  
+  
+            
+          
+          </span>
+        </div>
+         
+      <div class="fw">kids
+          <span class="tooltiptext">
+            <div class="mine">
+
+          
+          
+              <h2>Shoes</h2>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+              <li>sustainable materials</li>
+              <li>top pics under 7.500</li>
+              <li>slae</li>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+  
+          </div>
+  
+  
+            
+          <div class="mine">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+         
+            
+  
+          </div>
+           
+          <div class="mine">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+          </div>
+  
+           
+          <div class="mine">
+  
+            
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+  
+          </div>
+  
+  
+          </span>
+        </div>
+         
+      <div class="fw">cell
+          <span class="tooltiptext">
+            <div class="mine">
+
+          
+          
+              <h2>Shoes</h2>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+              <li>sustainable materials</li>
+              <li>top pics under 7.500</li>
+              <li>slae</li>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+  
+          </div>
+  
+  
+            
+          <div class="mine">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+         
+            
+  
+          </div>
+           
+          <div class="mine">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+          </div>
+  
+           
+          <div class="mine">
+  
+            
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+  
+          </div>
+  
+  
+          </span>
+        </div>
+         
+      <div class="fw">customize
+          <span class="tooltiptext">
+            <div class="mine">
+
+          
+          
+              <h2>Shoes</h2>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+              <li>sustainable materials</li>
+              <li>top pics under 7.500</li>
+              <li>slae</li>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+  
+          </div>
+  
+  
+            
+          <div class="mine">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+         
+            
+  
+          </div>
+           
+          <div class="mine">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+          </div>
+  
+           
+          <div class="mine">
+  
+            
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+  
+          </div>
+  
+  
+          </span>
+        </div>
+         
+      <div class="fw">snikers
+          <span class="tooltiptext">
+            <div class="mine">
+
+          
+          
+              <h2>Shoes</h2>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+              <li>sustainable materials</li>
+              <li>top pics under 7.500</li>
+              <li>slae</li>
+              <li> New Release</li>
+              <li>member Access</li>
+              <li>air forse 1</li>
+              <li>football club kids</li>
+  
+          </div>
+  
+  
+            
+          <div class="mine">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+         
+            
+  
+          </div>
+           
+          <div class="mine">
+  
+            
+            <h2>Shoes</h2>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+            <li>sustainable materials</li>
+            <li>top pics under 7.500</li>
+            <li>slae</li>
+            <li> New Release</li>
+            <li>member Access</li>
+            <li>air forse 1</li>
+            <li>football club kids</li>
+          </div>
+  
+           
+          
+          
+  
+          </span>
+        </div>
+      </div>
+    
+</body>
+</html>
